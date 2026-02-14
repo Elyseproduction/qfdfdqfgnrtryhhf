@@ -1,0 +1,124 @@
+{
+  "name": "PredJetX Pro - Predictor",
+  "short_name": "PredJetX",
+  "description": "Outil professionnel de prédiction JetX - Version installée uniquement",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "background_color": "#0b0e14",
+  "theme_color": "#00d1ff",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["utilities", "productivity"],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "icons": [
+    {
+      "src": "https://img.icons8.com/fluency/48/000000/airplane-mode-on.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/72/000000/airplane-mode-on.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/96/000000/airplane-mode-on.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/128/000000/airplane-mode-on.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/144/000000/airplane-mode-on.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/152/000000/airplane-mode-on.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/167/000000/airplane-mode-on.png",
+      "sizes": "167x167",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/180/000000/airplane-mode-on.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/192/000000/airplane-mode-on.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/256/000000/airplane-mode-on.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/384/000000/airplane-mode-on.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/512/000000/airplane-mode-on.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://via.placeholder.com/1280x720/00d1ff/000000?text=PredJetX+Pro",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Interface principale"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouvelle prédiction",
+      "short_name": "Prédire",
+      "description": "Lancer une nouvelle prédiction",
+      "url": "/?action=predict",
+      "icons": [
+        {
+          "src": "https://img.icons8.com/fluency/96/000000/airplane-mode-on.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Historique",
+      "short_name": "Historique",
+      "description": "Voir l'historique",
+      "url": "/?action=history",
+      "icons": [
+        {
+          "src": "https://img.icons8.com/fluency/96/000000/airplane-mode-on.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

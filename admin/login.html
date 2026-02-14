@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Connexion</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #0b0e14;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .login-box {
+        background: rgba(30, 36, 48, 0.7);
+        border-radius: 30px;
+        padding: 40px;
+        width: 100%;
+        max-width: 400px;
+        border: 2px solid #00d1ff;
+        box-shadow: 0 0 30px rgba(0, 209, 255, 0.3);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        background: linear-gradient(135deg, #00d1ff, #00ffcc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        background: rgba(11, 14, 20, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        color: white;
+        font-size: 16px;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #00d1ff;
+      }
+
+      button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #00d1ff, #0077ff);
+        border: none;
+        border-radius: 15px;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 30px rgba(0, 209, 255, 0.5);
+      }
+
+      .error {
+        color: #ff3b3b;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h1>ACCÈS ADMIN</h1>
+      <input
+        type="password"
+        id="password"
+        placeholder="Mot de passe"
+        onkeypress="if (event.key === 'Enter') login();"
+      />
+      <button onclick="login()">SE CONNECTER</button>
+      <div id="error" class="error"></div>
+    </div>
+
+    <script>
+      function login() {
+        const password = document.getElementById("password").value;
+
+        // Changez ce mot de passe !
+        if (password === "ZahGasy1") {
+          sessionStorage.setItem("adminAuth", "true");
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("error").textContent =
+            "Mot de passe incorrect";
+        }
+      }
+    </script>
+  </body>
+</html>

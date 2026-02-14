@@ -1,0 +1,10 @@
+{
+  "licenses": {},
+  "settings": {
+    "trialPeriod": 24,
+    "maxDevicesPerLicense": 3,
+    "allowOffline": true,
+    "lastUpdate": "2024-01-01T00:00:00.000Z"
+  },
+  "blacklist": []
+}

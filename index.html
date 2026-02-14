@@ -1,0 +1,3499 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#00d1ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="PredJetX Pro" />
+
+    <!-- Balises PWA importantes -->
+    <meta name="apple-mobile-web-app-title" content="PredJetX Pro" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#00d1ff" />
+    <meta
+      name="msapplication-TileImage"
+      content="https://img.icons8.com/fluency/192/000000/airplane-mode-on.png"
+    />
+
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Icônes pour installation -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://img.icons8.com/fluency/16/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://img.icons8.com/fluency/32/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="https://img.icons8.com/fluency/96/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="https://img.icons8.com/fluency/192/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="https://img.icons8.com/fluency/512/000000/airplane-mode-on.png"
+    />
+
+    <!-- Apple touch icons -->
+    <link
+      rel="apple-touch-icon"
+      href="https://img.icons8.com/fluency/192/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="https://img.icons8.com/fluency/152/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://img.icons8.com/fluency/180/000000/airplane-mode-on.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="167x167"
+      href="https://img.icons8.com/fluency/167/000000/airplane-mode-on.png"
+    />
+
+    <!-- Splash screens pour iOS -->
+    <link
+      href="https://img.icons8.com/fluency/2048/000000/airplane-mode-on.png"
+      media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+      rel="apple-touch-startup-image"
+    />
+    <link
+      href="https://img.icons8.com/fluency/2048/000000/airplane-mode-on.png"
+      media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)"
+      rel="apple-touch-startup-image"
+    />
+    <link
+      href="https://img.icons8.com/fluency/2048/000000/airplane-mode-on.png"
+      media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3)"
+      rel="apple-touch-startup-image"
+    />
+
+    <title>PredJetX Pro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent: #00d1ff;
+        --accent-glow: rgba(0, 209, 255, 0.5);
+        --neon: #00ffcc;
+        --neon-glow: rgba(0, 255, 204, 0.4);
+        --bg: #0b0e14;
+        --bg-light: #151921;
+        --card: rgba(30, 36, 48, 0.7);
+        --card-hover: rgba(42, 49, 63, 0.8);
+        --red: #ff3b3b;
+        --green: #00ff66;
+        --text: #ffffff;
+        --text-secondary: #a0a8b8;
+
+        /* Image de fond par défaut */
+        --background-image: none;
+      }
+
+      * {
+        -webkit-tap-highlight-color: transparent;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 16px;
+        overflow-x: hidden;
+        position: relative;
+
+        /* Application de l'image de fond */
+        background-image: var(--background-image);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        transition: background-image 0.5s ease;
+      }
+
+      /* Overlay léger pour que le texte reste lisible */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* MODAL D'INSTALLATION */
+      #install-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        z-index: 10000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+      }
+
+      .install-content {
+        background: rgba(30, 36, 48, 0.95);
+        width: 100%;
+        max-width: 450px;
+        border-radius: 30px;
+        border: 2px solid var(--accent);
+        padding: 40px 24px;
+        box-shadow: 0 30px 60px rgba(0, 209, 255, 0.3);
+        animation: installAppear 0.5s ease;
+        backdrop-filter: blur(10px);
+        text-align: center;
+      }
+
+      @keyframes installAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .install-icon {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 30px;
+        filter: drop-shadow(0 0 30px var(--accent));
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .install-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--accent), var(--neon));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+      }
+
+      .install-subtitle {
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .install-steps {
+        text-align: left;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-number {
+        width: 28px;
+        height: 28px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--bg);
+        font-family: "Orbitron", sans-serif;
+        box-shadow: 0 0 15px var(--accent-glow);
+      }
+
+      .install-btn {
+        background: linear-gradient(135deg, var(--accent), #0077ff);
+        color: white;
+        border: none;
+        padding: 18px 36px;
+        border-radius: 50px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        box-shadow: 0 10px 30px rgba(0, 209, 255, 0.3);
+      }
+
+      .install-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 209, 255, 0.5);
+      }
+
+      .install-btn:active {
+        transform: translateY(0);
+      }
+
+      .install-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .loader {
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top: 3px solid var(--accent);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* MODAL PAS D'INTERNET */
+      #no-internet-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 2000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+      }
+
+      .no-internet-content {
+        background: rgba(30, 36, 48, 0.95);
+        width: 100%;
+        max-width: 400px;
+        border-radius: 24px;
+        border: 2px solid var(--red);
+        padding: 40px 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        animation: modalAppear 0.4s ease;
+        backdrop-filter: blur(10px);
+        text-align: center;
+      }
+
+      .no-internet-icon {
+        font-size: 64px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 20px var(--red));
+      }
+
+      .no-internet-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--red);
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(255, 59, 59, 0.5);
+      }
+
+      .no-internet-message {
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .retry-btn {
+        background: linear-gradient(135deg, var(--red), #ff0000);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 50px;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .retry-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 30px rgba(255, 59, 59, 0.5);
+      }
+
+      /* Contenu au-dessus de l'overlay */
+      .app-container,
+      .menu-button,
+      .side-panel,
+      .panel-overlay,
+      #install-container,
+      #license-modal,
+      #overlay,
+      .toast-message {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* MENU HAMBURGER - TRANSPARENT */
+      .menu-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background: rgba(30, 36, 48, 0.2);
+        border: 2px solid var(--accent);
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        z-index: 3000;
+        box-shadow: 0 0 15px var(--accent-glow);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .menu-button:hover {
+        transform: scale(1.05);
+        background: rgba(30, 36, 48, 0.3);
+      }
+
+      .menu-button:active {
+        transform: scale(0.95);
+      }
+
+      .menu-button span {
+        width: 25px;
+        height: 3px;
+        background: var(--neon);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+
+      .menu-button.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+
+      .menu-button.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-button.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+
+      /* PANEL LATÉRAL - ENCORE PLUS TRANSPARENT */
+      .side-panel {
+        position: fixed;
+        top: 0;
+        left: -350px;
+        width: 300px;
+        height: 100vh;
+        background: rgba(30, 36, 48, 0.15);
+        border-right: 2px solid var(--accent);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+        z-index: 2500;
+        transition: left 0.3s ease;
+        padding: 80px 20px 20px;
+        overflow-y: auto;
+        backdrop-filter: blur(15px);
+      }
+
+      .side-panel.open {
+        left: 0;
+      }
+
+      .panel-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--neon));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        margin-bottom: 25px;
+        text-align: center;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .panel-section {
+        background: rgba(11, 14, 20, 0.1);
+        border-radius: 16px;
+        padding: 15px;
+        margin-bottom: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+      }
+
+      .section-label {
+        font-size: 12px;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .section-label span {
+        font-size: 16px;
+      }
+
+      /* BOUTON MUSIQUE DANS LE PANEL - TRANSPARENT */
+      .music-control-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(30, 36, 48, 0.1);
+        border-radius: 50px;
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+      }
+
+      .music-label-panel {
+        font-size: 13px;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .music-label-panel span {
+        font-size: 18px;
+      }
+
+      .toggle-switch {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .toggle-switch.active {
+        background: var(--accent);
+        border-color: var(--neon);
+        box-shadow: 0 0 15px var(--neon-glow);
+      }
+
+      .toggle-switch .slider {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        background: white;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .toggle-switch.active .slider {
+        left: 32px;
+        background: var(--bg);
+      }
+
+      .toggle-switch:active {
+        transform: scale(0.95);
+      }
+
+      /* SÉLECTEUR DE THÈME DANS LE PANEL - TRANSPARENT */
+      .theme-options-panel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .theme-option-panel {
+        background: rgba(30, 36, 48, 0.1);
+        border-radius: 12px;
+        padding: 10px 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        backdrop-filter: blur(8px);
+      }
+
+      .theme-option-panel:hover {
+        transform: translateY(-3px);
+        background: rgba(30, 36, 48, 0.2);
+      }
+
+      .theme-option-panel.active {
+        border-color: var(--neon);
+        box-shadow: 0 0 15px var(--neon-glow);
+      }
+
+      .theme-colors {
+        display: flex;
+        width: 100%;
+        height: 30px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .theme-color {
+        flex: 1;
+        height: 100%;
+      }
+
+      .theme-name {
+        font-size: 10px;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      /* SÉLECTEUR DE FOND D'ÉCRAN - TRANSPARENT */
+      .wallpaper-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+
+      .wallpaper-option {
+        aspect-ratio: 1/1;
+        border-radius: 10px;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .wallpaper-option:hover {
+        transform: scale(1.05);
+        border-color: var(--accent);
+      }
+
+      .wallpaper-option.active {
+        border-color: var(--neon);
+        box-shadow: 0 0 15px var(--neon-glow);
+      }
+
+      .wallpaper-option::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .wallpaper-option:hover::after {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .wallpaper-option .number {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.5);
+        color: var(--neon);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        z-index: 2;
+        border: 1px solid var(--neon);
+        backdrop-filter: blur(5px);
+      }
+
+      /* OPTION DIAPORAMA - TRANSPARENT */
+      .slideshow-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(30, 36, 48, 0.1);
+        border-radius: 50px;
+        padding: 10px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 10px;
+        backdrop-filter: blur(8px);
+      }
+
+      .slideshow-label {
+        font-size: 13px;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .slideshow-label span {
+        font-size: 16px;
+      }
+
+      .slideshow-speed {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .speed-input {
+        flex: 1;
+        background: rgba(30, 36, 48, 0.2);
+        border: 1px solid var(--accent);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 30px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 12px;
+        outline: none;
+        backdrop-filter: blur(5px);
+      }
+
+      .speed-input:focus {
+        box-shadow: 0 0 10px var(--accent-glow);
+      }
+
+      /* Overlay pour fermer le menu - LÉGER */
+      .panel-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 2400;
+        display: none;
+        backdrop-filter: blur(2px);
+      }
+
+      .panel-overlay.open {
+        display: block;
+      }
+
+      /* BANNIÈRE PLATEFORME - TRANSPARENTE */
+      .platform-banner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(30, 36, 48, 0.4);
+        border-radius: 20px;
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 20px var(--accent-glow);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+
+      .platform-banner::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        animation: rotate 10s linear infinite;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .platform-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        z-index: 1;
+        flex: 1;
+      }
+
+      .platform-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 10px var(--neon-glow));
+        transition: all 0.3s ease;
+      }
+
+      .platform-logo:hover {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 15px var(--neon));
+      }
+
+      .platform-name {
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--neon));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        letter-spacing: 1px;
+      }
+
+      .platform-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .divider-icon {
+        font-size: 24px;
+        filter: drop-shadow(0 0 10px var(--neon));
+        animation: fly 2s ease-in-out infinite;
+      }
+
+      @keyframes fly {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+      }
+
+      /* Bouton d'installation */
+      #install-container {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2000;
+        width: 90%;
+        max-width: 320px;
+        display: none;
+        animation: slideUp 0.5s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 20px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      #install-btn {
+        width: 100%;
+        background: linear-gradient(135deg, var(--accent), #0077ff);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 209, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        transition: all 0.3s ease;
+      }
+
+      #install-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: white;
+      }
+
+      /* Modal de vérification */
+      #license-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+      }
+
+      .modal-content {
+        background: rgba(30, 36, 48, 0.95);
+        width: 100%;
+        max-width: 400px;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 209, 255, 0.2);
+        padding: 32px 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        animation: modalAppear 0.4s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      @keyframes modalAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .modal-header span {
+        font-size: 32px;
+      }
+
+      .modal-header h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--neon));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      .tabs {
+        display: flex;
+        background: rgba(11, 14, 20, 0.7);
+        border-radius: 12px;
+        padding: 4px;
+        margin-bottom: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+      }
+
+      .tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-family: "Orbitron", sans-serif;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .tab.active {
+        background: var(--accent);
+        color: var(--bg);
+        font-weight: 700;
+      }
+
+      .input-box {
+        background: rgba(11, 14, 20, 0.7);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 14px 16px;
+        border-radius: 12px;
+        width: 100%;
+        margin: 8px 0 16px;
+        outline: none;
+        font-size: 14px;
+        font-family: "Inter", sans-serif;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+
+      .input-box:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.1);
+      }
+
+      .alert-blue {
+        background: rgba(0, 209, 255, 0.1);
+        border: 1px solid rgba(0, 209, 255, 0.2);
+        color: #8ee5ff;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin: 16px 0;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .btn-primary {
+        width: 100%;
+        background: linear-gradient(135deg, var(--accent), #0077ff);
+        border: none;
+        color: white;
+        padding: 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        margin-top: 8px;
+      }
+
+      /* Scanner overlay */
+      #overlay {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(30, 36, 48, 0.9) 0%,
+          rgba(11, 14, 20, 0.95) 100%
+        );
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        backdrop-filter: blur(5px);
+      }
+
+      .scanner-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+        background: linear-gradient(135deg, var(--accent), var(--neon));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .fingerprint-wrapper {
+        width: 140px;
+        height: 140px;
+        border: 3px solid rgba(0, 209, 255, 0.3);
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        background: var(--card);
+        transition: all 0.3s ease;
+        box-shadow: 0 0 30px rgba(0, 209, 255, 0.1);
+        backdrop-filter: blur(5px);
+      }
+
+      .fingerprint-wrapper:active {
+        border-color: var(--neon);
+        box-shadow: 0 0 40px var(--neon-glow);
+        transform: scale(0.95);
+      }
+
+      .scan-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--neon),
+          transparent
+        );
+        box-shadow: 0 0 20px var(--neon);
+        animation: scanMove 1.5s linear infinite;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      .fingerprint-wrapper:active .scan-line {
+        opacity: 1;
+      }
+
+      @keyframes scanMove {
+        0% {
+          top: 0;
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          opacity: 0;
+        }
+      }
+
+      .fingerprint-icon-div {
+        width: 80px;
+        height: 80px;
+        background: url("https://img.icons8.com/fluency/96/000000/airplane-mode-on.png")
+          center/contain no-repeat;
+        filter: drop-shadow(0 0 10px var(--accent));
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+
+      .scanner-hint {
+        color: var(--text-secondary);
+        font-size: 12px;
+        font-family: "Orbitron", sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* Interface principale - TRANSPARENTE */
+      .app-container {
+        background: rgba(30, 36, 48, 0.6);
+        border-radius: 24px;
+        padding: 28px 24px;
+        width: 100%;
+        max-width: 450px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(15px);
+        margin-bottom: 20px;
+        margin-top: 50px;
+      }
+
+      .app-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 28px;
+        background: linear-gradient(135deg, var(--accent), var(--neon));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        letter-spacing: 2px;
+      }
+
+      .label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      /* Saisie heure améliorée - ULTRA RAPIDE */
+      .time-input-container {
+        display: flex;
+        background: rgba(11, 14, 20, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 12px 15px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+        gap: 4px;
+        position: relative;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+
+      .time-input-container:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.2);
+      }
+
+      .time-input-container input {
+        background: transparent;
+        border: none;
+        color: var(--neon);
+        font-size: 36px;
+        width: 65px;
+        text-align: center;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 900;
+        outline: none;
+        padding: 5px 0;
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+        transition: all 0.2s ease;
+      }
+
+      .time-input-container input:focus {
+        background: rgba(0, 209, 255, 0.2);
+        border-radius: 12px;
+        transform: scale(1.05);
+      }
+
+      .time-separator {
+        color: var(--accent);
+        font-size: 36px;
+        font-weight: 900;
+        font-family: "Orbitron", sans-serif;
+        line-height: 1;
+        margin: 0 2px;
+        animation: blink 1s infinite;
+        text-shadow: 0 0 10px var(--accent-glow);
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Grille chiffres améliorée - TRANSPARENTE */
+      .grid-inputs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .grid-inputs div {
+        background: rgba(11, 14, 20, 0.3);
+        border-radius: 20px;
+        padding: 15px 10px;
+        border: 2px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(5px);
+      }
+
+      .grid-inputs div:focus-within {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(0, 209, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .grid-inputs label {
+        display: block;
+        font-size: 11px;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+      }
+
+      .grid-inputs div:focus-within label {
+        color: var(--accent);
+        transform: scale(1.1);
+      }
+
+      .grid-inputs input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 800;
+        font-family: "Orbitron", sans-serif;
+        outline: none;
+        -webkit-appearance: textfield;
+        appearance: textfield;
+        transition: all 0.2s ease;
+      }
+
+      .grid-inputs input:focus {
+        color: var(--neon);
+        transform: scale(1.1);
+      }
+
+      .grid-inputs input.valid {
+        color: var(--green);
+        text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+      }
+
+      .btn-calc {
+        width: 100%;
+        background: linear-gradient(135deg, var(--accent), #0077ff);
+        border: none;
+        color: white;
+        padding: 20px;
+        border-radius: 20px;
+        font-weight: 800;
+        font-family: "Orbitron", sans-serif;
+        font-size: 16px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        box-shadow: 0 10px 20px rgba(0, 209, 255, 0.2);
+      }
+
+      .btn-calc:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 209, 255, 0.4);
+      }
+
+      .btn-calc:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* RÉSULTAT - VERSION AMÉLIORÉE AVEC EFFETS NÉON ET FEEDBACK */
+      .result-box {
+        background: rgba(11, 14, 20, 0.3);
+        border-radius: 20px;
+        padding: 24px;
+        text-align: center;
+        border: 2px solid var(--accent);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 30px var(--accent-glow);
+        animation: boxPulse 3s infinite;
+      }
+
+      @keyframes boxPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 20px var(--accent-glow);
+        }
+        50% {
+          box-shadow: 0 0 40px var(--neon-glow);
+        }
+      }
+
+      .result-box::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        animation: rotate 15s linear infinite;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .result-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 0 10px var(--accent-glow);
+        animation: labelGlow 2s infinite;
+      }
+
+      @keyframes labelGlow {
+        0%,
+        100% {
+          text-shadow: 0 0 5px var(--accent-glow);
+        }
+        50% {
+          text-shadow: 0 0 15px var(--neon-glow);
+        }
+      }
+
+      .final-time {
+        font-size: 52px;
+        font-weight: 900;
+        color: var(--neon);
+        font-family: "Orbitron", sans-serif;
+        text-shadow:
+          0 0 30px var(--neon-glow),
+          0 0 60px var(--neon);
+        line-height: 1.2;
+        position: relative;
+        z-index: 1;
+        animation: timeGlow 2s ease-in-out infinite;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+      }
+
+      @keyframes timeGlow {
+        0%,
+        100% {
+          text-shadow:
+            0 0 20px var(--neon-glow),
+            0 0 40px var(--neon);
+        }
+        50% {
+          text-shadow:
+            0 0 40px var(--neon),
+            0 0 80px var(--accent);
+        }
+      }
+
+      /* BOUTONS DE FEEDBACK */
+      .feedback-buttons {
+        position: relative;
+        z-index: 2;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .feedback-label {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-bottom: 10px;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .feedback-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .feedback-btn {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 30px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+
+      .feedback-btn.success {
+        background: rgba(0, 255, 102, 0.2);
+        border: 1px solid var(--green);
+        color: white;
+      }
+
+      .feedback-btn.success:hover {
+        background: var(--green);
+        color: var(--bg);
+        transform: scale(1.05);
+      }
+
+      .feedback-btn.failure {
+        background: rgba(255, 59, 59, 0.2);
+        border: 1px solid var(--red);
+        color: white;
+      }
+
+      .feedback-btn.failure:hover {
+        background: var(--red);
+        color: var(--bg);
+        transform: scale(1.05);
+      }
+
+      .feedback-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* INDICATEUR D'ALGORITHME */
+      .algorithm-indicator {
+        position: fixed;
+        bottom: 100px;
+        left: 20px;
+        background: rgba(30, 36, 48, 0.3);
+        border: 1px solid var(--accent);
+        border-radius: 30px;
+        padding: 5px 12px;
+        font-size: 10px;
+        color: var(--text-secondary);
+        font-family: "Orbitron", sans-serif;
+        backdrop-filter: blur(5px);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .algorithm-indicator .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Boutons d'action - TRANSPARENTS */
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .action-btn {
+        flex: 1;
+        background: rgba(11, 14, 20, 0.3);
+        border: 2px solid var(--accent);
+        color: white;
+        padding: 15px;
+        border-radius: 16px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .action-btn:active {
+        background: var(--accent);
+        color: var(--bg);
+        transform: scale(0.95);
+      }
+
+      .action-btn.share {
+        background: rgba(0, 255, 102, 0.2);
+        border-color: var(--green);
+        color: white;
+      }
+
+      .action-btn.share:active {
+        background: var(--green);
+        color: var(--bg);
+      }
+
+      /* Toast message */
+      .toast-message {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.9);
+        background: var(--card);
+        color: var(--neon);
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        border: 2px solid var(--neon);
+        box-shadow: 0 0 20px var(--neon-glow);
+        z-index: 10001;
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        white-space: nowrap;
+        backdrop-filter: blur(10px);
+      }
+
+      .toast-message.show {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+
+      .hash-display {
+        font-family: "Orbitron", monospace;
+        font-size: 11px;
+        color: var(--accent);
+        margin: 15px 0;
+        text-align: center;
+        background: rgba(0, 209, 255, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+        display: none;
+        border: 1px solid rgba(0, 209, 255, 0.2);
+        animation: fadeIn 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Historique - TRANSPARENT */
+      .history-container {
+        background: rgba(11, 14, 20, 0.3);
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 25px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+      }
+
+      .history-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .history-item {
+        background: rgba(30, 36, 48, 0.3);
+        border-radius: 16px;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 4px solid var(--accent);
+        font-size: 13px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        backdrop-filter: blur(5px);
+      }
+
+      .history-item:hover {
+        transform: translateX(8px);
+        background: rgba(42, 49, 63, 0.4);
+      }
+
+      .history-item .input {
+        color: var(--text-secondary);
+        font-family: monospace;
+        font-size: 12px;
+      }
+
+      .history-item .output {
+        color: var(--neon);
+        font-weight: 800;
+        font-family: "Orbitron", sans-serif;
+        font-size: 16px;
+        text-shadow: 0 0 10px var(--neon-glow);
+      }
+
+      .history-item .time {
+        color: var(--text-secondary);
+        font-size: 10px;
+        margin-top: 5px;
+      }
+
+      .input-hint {
+        font-size: 11px;
+        color: var(--text-secondary);
+        text-align: center;
+        margin: 10px 0 20px;
+        padding: 8px;
+        background: rgba(0, 209, 255, 0.05);
+        border-radius: 30px;
+        display: none;
+        animation: pulseHint 2s infinite;
+        backdrop-filter: blur(5px);
+      }
+
+      @keyframes pulseHint {
+        0%,
+        100% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+          background: rgba(0, 209, 255, 0.1);
+        }
+      }
+
+      .input-hint.show {
+        display: block;
+      }
+
+      .badge-new {
+        background: var(--green);
+        color: var(--bg);
+        font-size: 9px;
+        padding: 3px 8px;
+        border-radius: 20px;
+        margin-left: 10px;
+        font-weight: bold;
+        box-shadow: 0 0 10px var(--green);
+      }
+
+      .key-generated {
+        background: rgba(11, 14, 20, 0.7);
+        padding: 16px;
+        border-radius: 12px;
+        margin-top: 16px;
+        text-align: center;
+        font-family: "Orbitron", monospace;
+        font-size: 14px;
+        color: var(--neon);
+        word-break: break-all;
+        border: 1px solid rgba(0, 255, 204, 0.2);
+        backdrop-filter: blur(5px);
+      }
+
+      /* Responsive pour mobile */
+      @media (max-width: 450px) {
+        .app-container {
+          max-width: 100%;
+          padding: 20px 15px;
+        }
+
+        .time-input-container input {
+          font-size: 28px;
+          width: 50px;
+        }
+
+        .time-separator {
+          font-size: 28px;
+        }
+
+        .platform-logo {
+          width: 45px;
+          height: 45px;
+        }
+
+        .platform-name {
+          font-size: 12px;
+        }
+
+        .divider-icon {
+          font-size: 20px;
+        }
+
+        .theme-options-panel {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .wallpaper-options {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .final-time {
+          font-size: 42px;
+        }
+
+        .result-label {
+          font-size: 12px;
+          letter-spacing: 2px;
+        }
+
+        .feedback-btn {
+          font-size: 10px;
+          padding: 8px;
+        }
+
+        .algorithm-indicator {
+          bottom: 80px;
+          left: 10px;
+          font-size: 8px;
+          padding: 3px 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MODAL D'INSTALLATION PRINCIPAL -->
+    <div id="install-modal">
+      <div class="install-content">
+        <img
+          src="https://img.icons8.com/fluency/512/000000/airplane-mode-on.png"
+          alt="PredJetX Pro"
+          class="install-icon"
+        />
+
+        <div class="install-title">PREDJETX PRO</div>
+
+        <div class="install-subtitle">
+          ⚠️ Cette application doit être installée sur votre appareil pour
+          fonctionner
+        </div>
+
+        <div class="install-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div>Cliquez sur le bouton "INSTALLER" ci-dessous</div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div>Confirmez l'installation dans la fenêtre pop-up</div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div>Lancez l'application depuis votre écran d'accueil</div>
+          </div>
+        </div>
+
+        <button class="install-btn" id="installBtn" onclick="installApp()">
+          📲 INSTALLER L'APPLICATION
+        </button>
+
+        <div class="loader" id="installLoader" style="display: none"></div>
+
+        <a class="manual-link" onclick="showManualInstructions()">
+          ❓ Instructions manuelles
+        </a>
+
+        <div class="device-instructions" id="manualInstructions">
+          <strong>📱 ANDROID : INSTALLATION MANUELLE</strong><br /><br />
+          • <strong>Chrome :</strong> Menu ⋮ (3 points) > "Installer
+          l'application"<br />
+          • <strong>Samsung Internet :</strong> Menu > "Ajouter la page à" >
+          "Écran d'accueil"<br /><br />
+
+          <strong>📱 iOS (iPhone/iPad) :</strong><br />
+          • Safari > Partager > "Sur l'écran d'accueil"<br /><br />
+
+          <strong>💻 Ordinateur :</strong><br />
+          • Chrome/Edge : Icône d'installation dans la barre d'adresse
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL PAS D'INTERNET -->
+    <div id="no-internet-modal">
+      <div class="no-internet-content">
+        <div class="no-internet-icon">📡</div>
+        <div class="no-internet-title">PAS DE CONNEXION</div>
+        <div class="no-internet-message">
+          Une connexion internet est requise pour utiliser cette application.<br /><br />
+          Veuillez vérifier votre connexion et réessayer.
+        </div>
+        <button class="retry-btn" onclick="checkInternetAndRetry()">
+          RÉESSAYER
+        </button>
+      </div>
+    </div>
+
+    <!-- INDICATEUR D'ALGORITHME -->
+    <div class="algorithm-indicator" id="algorithmIndicator">
+      <span class="dot"></span>
+      <span id="algorithmName">Algorithme Standard</span>
+    </div>
+
+    <!-- MENU HAMBURGER -->
+    <div class="menu-button" id="menuButton" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- OVERLAY DU MENU -->
+    <div class="panel-overlay" id="panelOverlay" onclick="closeMenu()"></div>
+
+    <!-- PANEL LATÉRAL -->
+    <div class="side-panel" id="sidePanel">
+      <div class="panel-title">PERSONNALISATION</div>
+
+      <!-- SECTION MUSIQUE -->
+      <div class="panel-section">
+        <div class="section-label"><span>🎵</span> Audio</div>
+        <div class="music-control-panel">
+          <div class="music-label-panel">
+            <span>🎧</span> Musique d'ambiance
+          </div>
+          <div
+            class="toggle-switch"
+            id="musicTogglePanel"
+            onclick="toggleMusic()"
+          >
+            <div class="slider"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION THÈMES DE COULEURS -->
+      <div class="panel-section">
+        <div class="section-label"><span>🎨</span> Thèmes de couleurs</div>
+        <div class="theme-options-panel" id="themeOptionsPanel">
+          <!-- Les options seront générées par JavaScript -->
+        </div>
+      </div>
+
+      <!-- SECTION FONDS D'ÉCRAN -->
+      <div class="panel-section">
+        <div class="section-label"><span>🖼️</span> Fonds d'écran</div>
+
+        <!-- Option Diaporama -->
+        <div class="slideshow-control">
+          <div class="slideshow-label"><span>🎞️</span> Mode diaporama</div>
+          <div
+            class="toggle-switch"
+            id="slideshowToggle"
+            onclick="toggleSlideshow()"
+          >
+            <div class="slider"></div>
+          </div>
+        </div>
+
+        <!-- Vitesse du diaporama -->
+        <div
+          class="slideshow-speed"
+          id="slideshowSpeedControl"
+          style="display: none"
+        >
+          <span style="color: var(--text-secondary); font-size: 11px"
+            >⏱️ Vitesse (s)</span
+          >
+          <input
+            type="number"
+            id="slideshowSpeed"
+            class="speed-input"
+            min="2"
+            max="30"
+            value="5"
+            step="1"
+            onchange="updateSlideshowSpeed()"
+          />
+        </div>
+
+        <!-- Grille des 10 images -->
+        <div class="wallpaper-options" id="wallpaperOptions">
+          <!-- Les 10 options seront générées par JavaScript -->
+        </div>
+      </div>
+
+      <!-- SECTION STATISTIQUES DES ALGORITHMES -->
+      <div class="panel-section">
+        <div class="section-label"><span>🤖</span> Algorithmes</div>
+        <div
+          id="algorithmsStats"
+          style="font-size: 11px; color: var(--text-secondary)"
+        >
+          <!-- Les statistiques seront affichées ici -->
+        </div>
+      </div>
+
+      <!-- SECTION STATUT LICENCE -->
+      <div class="panel-section" id="licenseStatusPanel" style="display: none">
+        <div class="section-label"><span>🔐</span> Licence</div>
+        <div
+          id="licenseStatus"
+          style="
+            font-size: 12px;
+            color: var(--neon);
+            text-align: center;
+            padding: 10px;
+          "
+        >
+          <!-- Statut licence affiché ici -->
+        </div>
+      </div>
+
+      <div
+        style="
+          text-align: center;
+          margin-top: 20px;
+          color: var(--text-secondary);
+          font-size: 10px;
+        "
+      >
+        JetX Predictor Pro v2.0 - IA Adaptative
+      </div>
+    </div>
+
+    <div id="install-container">
+      <button id="install-btn" onclick="installApp()">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+        </svg>
+        INSTALLER L'APPLICATION
+      </button>
+    </div>
+
+    <div id="license-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span>🔐</span>
+          <h2>VERIFICATION PRO</h2>
+        </div>
+        <div class="tabs">
+          <div class="tab active" id="tab-user" onclick="switchTab('user')">
+            UTILISATEUR
+          </div>
+          <div class="tab" id="tab-admin" onclick="switchTab('admin')">
+            ADMIN
+          </div>
+        </div>
+
+        <div id="view-user">
+          <label class="label">CODE DE LICENCE</label>
+          <input
+            type="text"
+            id="license-input"
+            class="input-box"
+            placeholder="Entrez votre clé..."
+            value="JETX-Z2PV-ZSPU-HXCX-LALS"
+          />
+          <div class="alert-blue" id="licenseMessage">
+            <span>ℹ</span>
+            <div id="licenseMessageText">
+              Entrez votre licence pour activer l'application.
+            </div>
+          </div>
+          <button class="btn-primary" onclick="checkLicense()">ACTIVER</button>
+          <div style="text-align: center; margin-top: 15px">
+            <span style="color: var(--text-secondary); font-size: 10px"
+              >Licence valide jusqu'au
+              <span id="licenceExpiryDisplay">--/--/----</span></span
+            >
+          </div>
+        </div>
+
+        <div id="view-admin" style="display: none">
+          <div id="admin-login-view">
+            <label class="label">MOT DE PASSE ADMIN</label>
+            <input
+              type="password"
+              id="admin-pass"
+              class="input-box"
+              placeholder="••••••••"
+            />
+            <button class="btn-primary" onclick="loginAdmin()">
+              CONNEXION
+            </button>
+          </div>
+          <div id="admin-dashboard" style="display: none">
+            <label class="label">DURÉE DE VALIDITÉ</label>
+            <select id="key-duration" class="input-box">
+              <option value="1">24 Heures</option>
+              <option value="7">7 Jours</option>
+              <option value="30" selected>30 Jours</option>
+              <option value="365">1 An</option>
+              <option value="9999">ILLIMITÉ</option>
+            </select>
+            <label class="label">TYPE DE LICENCE</label>
+            <select id="license-type" class="input-box">
+              <option value="premium">Premium</option>
+              <option value="lifetime">Lifetime</option>
+              <option value="trial">Trial</option>
+            </select>
+            <button class="btn-primary" onclick="generateKey()">
+              GÉNÉRER UNE CLÉ
+            </button>
+            <div id="new-key-display" class="key-generated"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="overlay">
+      <div class="scanner-title">PRED-JETX PRO</div>
+      <div
+        class="fingerprint-wrapper"
+        id="scanner"
+        onclick="unlockApp()"
+        oncontextmenu="return false;"
+      >
+        <div class="fingerprint-icon-div"></div>
+        <div class="scan-line"></div>
+      </div>
+      <div class="scanner-hint">APPUYER POUR DÉVERROUILLER</div>
+    </div>
+
+    <!-- Toast message -->
+    <div class="toast-message" id="toastMessage"></div>
+
+    <audio id="predictionMusic" loop preload="auto">
+      <source src="prediction.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="app-container">
+      <!-- BANNIÈRE PLATEFORME AVEC IMAGES LOCALES -->
+      <div class="platform-banner">
+        <div class="platform-item">
+          <!-- IMAGE BET261 - Placez votre fichier dans images/bet261-logo.png -->
+          <img
+            src="images/bet261-logo.png"
+            alt="Bet261"
+            class="platform-logo"
+          />
+          <span class="platform-name">BET261</span>
+        </div>
+        <div class="platform-divider">
+          <span class="divider-icon">✈️</span>
+        </div>
+        <div class="platform-item">
+          <!-- IMAGE JETX - Placez votre fichier dans images/jetx-logo.png -->
+          <img src="images/jetx-logo.png" alt="JetX" class="platform-logo" />
+          <span class="platform-name">JETX</span>
+        </div>
+      </div>
+
+      <h1 class="app-title">JETX PREDICTOR PRO</h1>
+
+      <label class="label">HEURE DE RÉFÉRENCE (HH:MM:SS)</label>
+      <div class="time-input-container" id="timeInputContainer">
+        <input
+          type="text"
+          id="hh"
+          maxlength="2"
+          placeholder="00"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="time-separator">:</span>
+        <input
+          type="text"
+          id="mm"
+          maxlength="2"
+          placeholder="00"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="time-separator">:</span>
+        <input
+          type="text"
+          id="ss"
+          maxlength="2"
+          placeholder="00"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+      </div>
+      <div class="input-hint" id="inputHint">
+        ⚡ Saisie automatique - Tapez 2 chiffres pour passer au champ suivant
+      </div>
+
+      <div class="grid-inputs">
+        <div>
+          <label> 1 ère</label>
+          <input
+            type="text"
+            id="c1"
+            value=""
+            maxlength="3"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            placeholder="0-9"
+          />
+        </div>
+        <div>
+          <label> 2 ème</label>
+          <input
+            type="text"
+            id="c2"
+            value=""
+            maxlength="3"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            placeholder="0-9"
+          />
+        </div>
+        <div>
+          <label> 3 ème</label>
+          <input
+            type="text"
+            id="c3"
+            value=""
+            maxlength="3"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            placeholder="0-9"
+          />
+        </div>
+      </div>
+
+      <!-- Boutons d'action -->
+      <div class="action-buttons">
+        <button class="action-btn" onclick="copyResult()" id="copyBtn">
+          📋 Copier
+        </button>
+        <button class="action-btn share" onclick="shareResult()" id="shareBtn">
+          📤 Partager
+        </button>
+      </div>
+
+      <div id="hashBox" class="hash-display"></div>
+
+      <button class="btn-calc" id="mainBtn" onclick="runPrediction()">
+        CALCULER LE SIGNAL
+      </button>
+
+      <!-- RÉSULTAT AVEC EFFETS NÉON ET FEEDBACK -->
+      <div class="result-box">
+        <div class="result-label">⚡ HEURE PRÉDITE ⚡</div>
+        <div id="result" class="final-time">--:--:--</div>
+        <!-- Les boutons de feedback seront ajoutés ici par JavaScript -->
+      </div>
+
+      <div class="history-container">
+        <div class="history-title">📋 HISTORIQUE (5 derniers)</div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+    </div>
+
+    <script>
+      // ============================================
+      // CONFIGURATION
+      // ============================================
+      const CONFIG = {
+        username: "Elyseproduction",
+        repo: "qfdfdqfgnrtryhhf",
+        token: "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",
+        licensesUrl:
+          "https://raw.githubusercontent.com/Elyseproduction/qfdfdqfgnrtryhhf/main/licenses.json",
+      };
+
+      // ============================================
+      // VARIABLES GLOBALES
+      // ============================================
+      let deferredPrompt;
+      let currentPrediction = "";
+      let musicEnabled = true;
+      let slideshowEnabled = false;
+      let slideshowInterval = null;
+      let currentWallpaper = 1;
+      let slideshowSpeed = 5;
+      let lastPrediction = null;
+      let currentLicense = null;
+      let licenseCheckInterval = null;
+      let isLicenseValid = false;
+      let internetCheckInterval = null;
+      let isOnline = navigator.onLine;
+
+      // Algorithmes disponibles
+      const algorithms = [
+        {
+          id: "algo1",
+          name: "Algorithme Standard",
+          description: "Basé sur le hash simple",
+          weight: 1.0,
+          successRate: 0,
+          attempts: 0,
+        },
+        {
+          id: "algo2",
+          name: "Algorithme Amélioré",
+          description: "Avec poids supplémentaires",
+          weight: 1.2,
+          successRate: 0,
+          attempts: 0,
+        },
+        {
+          id: "algo3",
+          name: "Algorithme Dynamique",
+          description: "S'adapte aux résultats",
+          weight: 1.5,
+          successRate: 0,
+          attempts: 0,
+        },
+      ];
+
+      let currentAlgorithm = 0;
+
+      // ============================================
+      // GESTION DE L'INSTALLATION PWA (CORRIGÉ)
+      // ============================================
+
+      function isAppInstalled() {
+        return (
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.navigator.standalone === true ||
+          window.matchMedia("(display-mode: fullscreen)").matches ||
+          window.matchMedia("(display-mode: minimal-ui)").matches
+        );
+      }
+
+      // Vérifier au chargement
+      if (isAppInstalled()) {
+        document.getElementById("install-modal").style.display = "none";
+      } else {
+        document.getElementById("install-modal").style.display = "flex";
+      }
+
+      // Capturer l'événement beforeinstallprompt
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log("✅ Installation disponible");
+
+        // Afficher le bouton d'installation
+        document.getElementById("installBtn").disabled = false;
+      });
+
+      // Quand l'application est installée
+      window.addEventListener("appinstalled", () => {
+        console.log("✅ Application installée");
+        document.getElementById("install-modal").style.display = "none";
+        deferredPrompt = null;
+        setTimeout(() => window.location.reload(), 1000);
+      });
+
+      // Fonction d'installation principale (CORRIGÉE)
+      async function installApp() {
+        if (!deferredPrompt) {
+          alert(
+            "❌ L'installation automatique n'est pas disponible.\n\nUtilisez le menu de votre navigateur :\n• Chrome: Menu ⋮ > Installer l'application\n• Samsung Internet: Menu > Ajouter à l'écran d'accueil",
+          );
+          return;
+        }
+
+        // Afficher le loader
+        document.getElementById("installBtn").style.display = "none";
+        document.getElementById("installLoader").style.display = "block";
+
+        try {
+          // Déclencher l'installation
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+
+          if (outcome === "accepted") {
+            console.log("Installation acceptée");
+          } else {
+            console.log("Installation refusée");
+            document.getElementById("installBtn").style.display = "block";
+            document.getElementById("installLoader").style.display = "none";
+          }
+        } catch (err) {
+          console.error("Erreur installation:", err);
+          document.getElementById("installBtn").style.display = "block";
+          document.getElementById("installLoader").style.display = "none";
+          alert(
+            "Erreur lors de l'installation. Utilisez les instructions manuelles.",
+          );
+        }
+
+        deferredPrompt = null;
+      }
+
+      function showManualInstructions() {
+        document.getElementById("manualInstructions").classList.toggle("show");
+      }
+
+      window.matchMedia("(display-mode: standalone)").addListener((e) => {
+        if (e.matches) {
+          document.getElementById("install-modal").style.display = "none";
+          window.location.reload();
+        }
+      });
+
+      // ============================================
+      // FONCTIONS DE VÉRIFICATION
+      // ============================================
+
+      async function checkInternetConnection() {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+          await fetch("https://www.google.com", {
+            method: "HEAD",
+            mode: "no-cors",
+            signal: controller.signal,
+          });
+
+          clearTimeout(timeoutId);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      async function fetchLicenses() {
+        try {
+          const response = await fetch(CONFIG.licensesUrl);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return await response.json();
+        } catch (error) {
+          console.error("Erreur chargement licences:", error);
+          throw error;
+        }
+      }
+
+      async function verifyLicense(licenseKey) {
+        if (!isOnline) {
+          return { valid: false, reason: "❌ Pas de connexion internet" };
+        }
+
+        try {
+          const data = await fetchLicenses();
+
+          const license = data.licenses ? data.licenses[licenseKey] : null;
+
+          if (!license) {
+            return { valid: false, reason: "❌ Licence invalide" };
+          }
+
+          if (license.status !== "active") {
+            return { valid: false, reason: "❌ Licence révoquée" };
+          }
+
+          const now = new Date();
+          const expiry = new Date(license.expiry);
+
+          if (now > expiry) {
+            return { valid: false, reason: "❌ Licence expirée" };
+          }
+
+          return {
+            valid: true,
+            expiry: license.expiry,
+            type: license.type,
+            license: license,
+          };
+        } catch (error) {
+          console.error("Erreur vérification:", error);
+          return { valid: false, reason: "❌ Erreur de connexion au serveur" };
+        }
+      }
+
+      async function handleInternetStatus() {
+        isOnline = await checkInternetConnection();
+
+        const noInternetModal = document.getElementById("no-internet-modal");
+        const licenseModal = document.getElementById("license-modal");
+        const overlay = document.getElementById("overlay");
+
+        if (!isAppInstalled()) return;
+
+        if (!isOnline) {
+          noInternetModal.style.display = "flex";
+          licenseModal.style.display = "none";
+          overlay.style.display = "none";
+          isLicenseValid = false;
+        } else {
+          noInternetModal.style.display = "none";
+
+          const savedLicense = localStorage.getItem("license_key");
+          if (savedLicense) {
+            const result = await verifyLicense(savedLicense);
+            if (result.valid) {
+              licenseModal.style.display = "none";
+              overlay.style.display = "flex";
+              isLicenseValid = true;
+              currentLicense = result;
+              updateLicenseStatus(result);
+            } else {
+              licenseModal.style.display = "flex";
+            }
+          } else {
+            licenseModal.style.display = "flex";
+          }
+        }
+      }
+
+      function startInternetMonitoring() {
+        if (internetCheckInterval) clearInterval(internetCheckInterval);
+        handleInternetStatus();
+        internetCheckInterval = setInterval(handleInternetStatus, 10000);
+        window.addEventListener("online", handleInternetStatus);
+        window.addEventListener("offline", handleInternetStatus);
+      }
+
+      async function checkInternetAndRetry() {
+        await handleInternetStatus();
+      }
+
+      function updateLicenseStatus(licenseInfo) {
+        const statusPanel = document.getElementById("licenseStatusPanel");
+        const statusDiv = document.getElementById("licenseStatus");
+        const expiryDisplay = document.getElementById("licenceExpiryDisplay");
+
+        if (licenseInfo && licenseInfo.valid) {
+          statusPanel.style.display = "block";
+          const expiryDate = new Date(licenseInfo.expiry).toLocaleDateString(
+            "fr-FR",
+          );
+          statusDiv.innerHTML = `
+            ✅ Licence active<br>
+            <span style="font-size: 10px; color: var(--text-secondary);">
+              Type: ${licenseInfo.type}<br>
+              Expire: ${expiryDate}
+            </span>
+          `;
+          if (expiryDisplay) expiryDisplay.textContent = expiryDate;
+        } else {
+          statusPanel.style.display = "none";
+        }
+      }
+
+      // ============================================
+      // FONCTIONS D'AUTHENTIFICATION
+      // ============================================
+
+      async function checkLicense() {
+        if (!isOnline) {
+          document.getElementById("licenseMessageText").innerHTML =
+            "❌ Pas de connexion internet";
+          return;
+        }
+
+        const license = document
+          .getElementById("license-input")
+          .value.trim()
+          .toUpperCase();
+        const messageEl = document.getElementById("licenseMessageText");
+
+        if (license === "ZahGasy1") {
+          localStorage.setItem("pred-jetx-pro_active", "true");
+          document.getElementById("license-modal").style.display = "none";
+          document.getElementById("overlay").style.display = "flex";
+          isLicenseValid = true;
+          showToast("✅ Mode développement activé");
+          return;
+        }
+
+        showToast("🔄 Vérification de la licence...", 3000);
+
+        const result = await verifyLicense(license);
+
+        if (result.valid) {
+          localStorage.setItem("pred-jetx-pro_active", "true");
+          localStorage.setItem("license_key", license);
+          localStorage.setItem("license_expiry", result.expiry);
+          currentLicense = result;
+          isLicenseValid = true;
+
+          document.getElementById("license-modal").style.display = "none";
+          document.getElementById("overlay").style.display = "flex";
+
+          updateLicenseStatus(result);
+
+          const expiryDate = new Date(result.expiry).toLocaleDateString(
+            "fr-FR",
+          );
+          showToast(`✅ Licence valide jusqu'au ${expiryDate}`);
+        } else {
+          messageEl.innerHTML = result.reason;
+          isLicenseValid = false;
+        }
+      }
+
+      function loginAdmin() {
+        const password = document.getElementById("admin-pass").value;
+        if (password === "ZahGasy1") {
+          document.getElementById("admin-login-view").style.display = "none";
+          document.getElementById("admin-dashboard").style.display = "block";
+          showToast("✅ Mode admin activé");
+        } else {
+          alert("❌ Mot de passe incorrect");
+        }
+      }
+
+      async function generateKey() {
+        alert("⚠️ Génération de licence désactivée dans cette version");
+      }
+
+      function switchTab(tab) {
+        const userTab = document.getElementById("tab-user");
+        const adminTab = document.getElementById("tab-admin");
+        const userView = document.getElementById("view-user");
+        const adminView = document.getElementById("view-admin");
+
+        if (tab === "user") {
+          userTab.classList.add("active");
+          adminTab.classList.remove("active");
+          userView.style.display = "block";
+          adminView.style.display = "none";
+        } else {
+          adminTab.classList.add("active");
+          userTab.classList.remove("active");
+          adminView.style.display = "block";
+          userView.style.display = "none";
+        }
+      }
+
+      // ============================================
+      // SCANNER
+      // ============================================
+      function unlockApp() {
+        if (!isOnline) {
+          showToast("❌ Pas de connexion internet", 3000);
+          return;
+        }
+
+        if (!isLicenseValid) {
+          document.getElementById("license-modal").style.display = "flex";
+          return;
+        }
+
+        const scanner = document.getElementById("scanner");
+        if (scanner) {
+          scanner.style.transform = "scale(0.95)";
+          setTimeout(() => (scanner.style.transform = "scale(1)"), 200);
+        }
+
+        if (navigator.vibrate) navigator.vibrate(50);
+
+        setTimeout(() => {
+          document.getElementById("overlay").style.display = "none";
+          if (musicEnabled) {
+            document
+              .getElementById("predictionMusic")
+              .play()
+              .catch(() => {});
+          }
+        }, 300);
+      }
+
+      // ============================================
+      // MUSIQUE
+      // ============================================
+      function initMusic() {
+        const savedState = localStorage.getItem("music_enabled");
+        musicEnabled = savedState !== null ? savedState === "true" : true;
+        updateMusicToggle();
+      }
+
+      function toggleMusic() {
+        musicEnabled = !musicEnabled;
+        const music = document.getElementById("predictionMusic");
+
+        if (musicEnabled) {
+          music.play().catch(() => {});
+          showToast("🎵 Musique activée");
+        } else {
+          music.pause();
+          showToast("🔇 Musique désactivée");
+        }
+        localStorage.setItem("music_enabled", musicEnabled);
+        updateMusicToggle();
+      }
+
+      function updateMusicToggle() {
+        const toggle = document.getElementById("musicTogglePanel");
+        if (toggle) {
+          if (musicEnabled) toggle.classList.add("active");
+          else toggle.classList.remove("active");
+        }
+      }
+
+      // ============================================
+      // THÈMES
+      // ============================================
+      const themes = [
+        { id: "blue", name: "Bleu", color1: "#00d1ff", color2: "#00ffcc" },
+        { id: "gold", name: "Or", color1: "#ffaa00", color2: "#ffdd44" },
+        { id: "purple", name: "Violet", color1: "#9933ff", color2: "#cc66ff" },
+        { id: "green", name: "Vert", color1: "#00ff88", color2: "#aaff00" },
+        { id: "red", name: "Rouge", color1: "#ff3366", color2: "#ff6600" },
+        { id: "cyber", name: "Cyber", color1: "#ff00ff", color2: "#00ffff" },
+        { id: "fire", name: "Feu", color1: "#ff5500", color2: "#ffaa00" },
+        { id: "ice", name: "Glace", color1: "#88ddff", color2: "#ffffff" },
+        {
+          id: "emerald",
+          name: "Émeraude",
+          color1: "#00cc88",
+          color2: "#88ff88",
+        },
+        { id: "rose", name: "Rose", color1: "#ff88aa", color2: "#ffccdd" },
+      ];
+
+      const themeValues = {
+        blue: {
+          accent: "#00d1ff",
+          accentGlow: "rgba(0,209,255,0.5)",
+          neon: "#00ffcc",
+          neonGlow: "rgba(0,255,204,0.4)",
+        },
+        gold: {
+          accent: "#ffaa00",
+          accentGlow: "rgba(255,170,0,0.5)",
+          neon: "#ffdd44",
+          neonGlow: "rgba(255,221,68,0.4)",
+        },
+        purple: {
+          accent: "#9933ff",
+          accentGlow: "rgba(153,51,255,0.5)",
+          neon: "#cc66ff",
+          neonGlow: "rgba(204,102,255,0.4)",
+        },
+        green: {
+          accent: "#00ff88",
+          accentGlow: "rgba(0,255,136,0.5)",
+          neon: "#aaff00",
+          neonGlow: "rgba(170,255,0,0.4)",
+        },
+        red: {
+          accent: "#ff3366",
+          accentGlow: "rgba(255,51,102,0.5)",
+          neon: "#ff6600",
+          neonGlow: "rgba(255,102,0,0.4)",
+        },
+        cyber: {
+          accent: "#ff00ff",
+          accentGlow: "rgba(255,0,255,0.5)",
+          neon: "#00ffff",
+          neonGlow: "rgba(0,255,255,0.4)",
+        },
+        fire: {
+          accent: "#ff5500",
+          accentGlow: "rgba(255,85,0,0.5)",
+          neon: "#ffaa00",
+          neonGlow: "rgba(255,170,0,0.4)",
+        },
+        ice: {
+          accent: "#88ddff",
+          accentGlow: "rgba(136,221,255,0.5)",
+          neon: "#ffffff",
+          neonGlow: "rgba(255,255,255,0.4)",
+        },
+        emerald: {
+          accent: "#00cc88",
+          accentGlow: "rgba(0,204,136,0.5)",
+          neon: "#88ff88",
+          neonGlow: "rgba(136,255,136,0.4)",
+        },
+        rose: {
+          accent: "#ff88aa",
+          accentGlow: "rgba(255,136,170,0.5)",
+          neon: "#ffccdd",
+          neonGlow: "rgba(255,204,221,0.4)",
+        },
+      };
+
+      function renderThemeOptions() {
+        const container = document.getElementById("themeOptionsPanel");
+        if (container) {
+          let html = "";
+          themes.forEach((theme) => {
+            html += `
+              <div class="theme-option-panel" data-theme="${theme.id}" onclick="setTheme('${theme.id}')">
+                <div class="theme-colors">
+                  <div class="theme-color" style="background: ${theme.color1}"></div>
+                  <div class="theme-color" style="background: ${theme.color2}"></div>
+                </div>
+                <span class="theme-name">${theme.name}</span>
+              </div>
+            `;
+          });
+          container.innerHTML = html;
+        }
+      }
+
+      function setTheme(themeName) {
+        const theme = themeValues[themeName];
+        if (theme) {
+          document.documentElement.style.setProperty("--accent", theme.accent);
+          document.documentElement.style.setProperty(
+            "--accent-glow",
+            theme.accentGlow,
+          );
+          document.documentElement.style.setProperty("--neon", theme.neon);
+          document.documentElement.style.setProperty(
+            "--neon-glow",
+            theme.neonGlow,
+          );
+          localStorage.setItem("selected_theme", themeName);
+
+          document
+            .querySelectorAll(".theme-option-panel")
+            .forEach((opt) => opt.classList.remove("active"));
+          const active = document.querySelector(
+            `.theme-option-panel[data-theme="${themeName}"]`,
+          );
+          if (active) active.classList.add("active");
+
+          showToast(`🎨 Thème ${themeName} appliqué`);
+        }
+      }
+
+      function loadTheme() {
+        const saved = localStorage.getItem("selected_theme");
+        setTheme(saved && themeValues[saved] ? saved : "blue");
+      }
+
+      // ============================================
+      // WALLPAPERS
+      // ============================================
+      function renderWallpaperOptions() {
+        const container = document.getElementById("wallpaperOptions");
+        if (container) {
+          let html = "";
+          for (let i = 1; i <= 10; i++) {
+            html += `
+              <div class="wallpaper-option" data-wallpaper="${i}" onclick="setWallpaper(${i})" style="background-image: url('images/${i}.png');">
+                <span class="number">${i}</span>
+              </div>
+            `;
+          }
+          container.innerHTML = html;
+        }
+      }
+
+      function setWallpaper(number) {
+        if (slideshowEnabled) toggleSlideshow();
+        currentWallpaper = number;
+        document.documentElement.style.setProperty(
+          "--background-image",
+          `url('images/${number}.png')`,
+        );
+        localStorage.setItem("selected_wallpaper", number);
+
+        document
+          .querySelectorAll(".wallpaper-option")
+          .forEach((opt) => opt.classList.remove("active"));
+        const active = document.querySelector(
+          `.wallpaper-option[data-wallpaper="${number}"]`,
+        );
+        if (active) active.classList.add("active");
+      }
+
+      function loadWallpaper() {
+        const saved = localStorage.getItem("selected_wallpaper");
+        if (saved) setWallpaper(parseInt(saved));
+      }
+
+      // ============================================
+      // SLIDESHOW
+      // ============================================
+      function toggleSlideshow() {
+        slideshowEnabled = !slideshowEnabled;
+        const toggle = document.getElementById("slideshowToggle");
+        const speedControl = document.getElementById("slideshowSpeedControl");
+
+        if (slideshowEnabled) {
+          toggle.classList.add("active");
+          speedControl.style.display = "flex";
+          startSlideshow();
+        } else {
+          toggle.classList.remove("active");
+          speedControl.style.display = "none";
+          stopSlideshow();
+          const saved = localStorage.getItem("selected_wallpaper");
+          if (saved) setWallpaper(parseInt(saved));
+        }
+        localStorage.setItem("slideshow_enabled", slideshowEnabled);
+      }
+
+      function startSlideshow() {
+        if (slideshowInterval) clearInterval(slideshowInterval);
+        let next = (currentWallpaper % 10) + 1;
+        slideshowInterval = setInterval(() => {
+          currentWallpaper = next;
+          document.documentElement.style.setProperty(
+            "--background-image",
+            `url('images/${next}.png')`,
+          );
+          localStorage.setItem("selected_wallpaper", next);
+
+          document
+            .querySelectorAll(".wallpaper-option")
+            .forEach((opt) => opt.classList.remove("active"));
+          const active = document.querySelector(
+            `.wallpaper-option[data-wallpaper="${next}"]`,
+          );
+          if (active) active.classList.add("active");
+
+          next = (next % 10) + 1;
+        }, slideshowSpeed * 1000);
+      }
+
+      function stopSlideshow() {
+        if (slideshowInterval) {
+          clearInterval(slideshowInterval);
+          slideshowInterval = null;
+        }
+      }
+
+      function updateSlideshowSpeed() {
+        const input = document.getElementById("slideshowSpeed");
+        if (input) {
+          slideshowSpeed = parseInt(input.value) || 5;
+          if (slideshowSpeed < 2) slideshowSpeed = 2;
+          if (slideshowSpeed > 30) slideshowSpeed = 30;
+          input.value = slideshowSpeed;
+          localStorage.setItem("slideshow_speed", slideshowSpeed);
+          if (slideshowEnabled) startSlideshow();
+        }
+      }
+
+      function loadSlideshowSettings() {
+        const savedEnabled = localStorage.getItem("slideshow_enabled");
+        const savedSpeed = localStorage.getItem("slideshow_speed");
+        if (savedSpeed) {
+          slideshowSpeed = parseInt(savedSpeed);
+          document.getElementById("slideshowSpeed").value = slideshowSpeed;
+        }
+        if (savedEnabled === "true") {
+          slideshowEnabled = true;
+          document.getElementById("slideshowToggle").classList.add("active");
+          document.getElementById("slideshowSpeedControl").style.display =
+            "flex";
+          startSlideshow();
+        }
+      }
+
+      // ============================================
+      // ALGORITHMES
+      // ============================================
+      function loadAlgorithmsStats() {
+        const saved = localStorage.getItem("algorithms_stats");
+        if (saved) {
+          const stats = JSON.parse(saved);
+          algorithms.forEach((algo, i) => {
+            if (stats[i]) {
+              algo.successRate = stats[i].successRate || 0;
+              algo.attempts = stats[i].attempts || 0;
+            }
+          });
+        }
+        updateAlgorithmIndicator();
+        updateAlgorithmsStatsDisplay();
+      }
+
+      function saveAlgorithmsStats() {
+        const stats = algorithms.map((a) => ({
+          successRate: a.successRate,
+          attempts: a.attempts,
+        }));
+        localStorage.setItem("algorithms_stats", JSON.stringify(stats));
+      }
+
+      function updateAlgorithmIndicator() {
+        const el = document.getElementById("algorithmName");
+        if (el) el.textContent = algorithms[currentAlgorithm].name;
+      }
+
+      function updateAlgorithmsStatsDisplay() {
+        const statsDiv = document.getElementById("algorithmsStats");
+        if (!statsDiv) return;
+
+        let html =
+          '<div style="margin-bottom:10px;">📊 Performance des algorithmes :</div>';
+        algorithms.forEach((algo, i) => {
+          const rate =
+            algo.attempts > 0
+              ? Math.round((algo.successRate / algo.attempts) * 100)
+              : 0;
+          const active = i === currentAlgorithm ? "🔥 " : "";
+          html += `
+            <div style="margin-bottom:8px; padding:5px; background:rgba(0,0,0,0.2); border-radius:5px;">
+              <div style="display:flex; justify-content:space-between;">
+                <span>${active}${algo.name}</span>
+                <span style="color:${rate > 50 ? "var(--green)" : "var(--red)"};">${rate}%</span>
+              </div>
+              <div style="font-size:9px; color:var(--text-secondary);">
+                Tentatives: ${algo.attempts} | Succès: ${algo.successRate}
+              </div>
+            </div>
+          `;
+        });
+        statsDiv.innerHTML = html;
+      }
+
+      function updateBestAlgorithm() {
+        let bestIndex = 0;
+        let bestRate = -1;
+        algorithms.forEach((algo, i) => {
+          if (algo.attempts >= 3) {
+            const rate = algo.successRate / algo.attempts;
+            if (rate > bestRate) {
+              bestRate = rate;
+              bestIndex = i;
+            }
+          }
+        });
+        if (bestIndex !== currentAlgorithm && bestRate > 0) {
+          currentAlgorithm = bestIndex;
+          updateAlgorithmIndicator();
+          updateAlgorithmsStatsDisplay();
+          showToast(
+            `🤖 Algorithme changé: ${algorithms[currentAlgorithm].name}`,
+          );
+        }
+      }
+
+      function predictWithCurrentAlgorithm(seed, hhNum, mmNum, ssNum) {
+        const algo = algorithms[currentAlgorithm];
+        const hash = simpleHash(seed + algo.id);
+        const weight = Math.floor((hash % 60) * algo.weight);
+        const addMinutes =
+          (Math.floor(hash / 60) % 5) + Math.floor(algo.weight);
+        const addSeconds = (Math.floor(hash / 300) % 10) + 1;
+        const now = new Date();
+        now.setHours(hhNum, mmNum, ssNum, 0);
+        now.setSeconds(now.getSeconds() + weight + addSeconds);
+        now.setMinutes(now.getMinutes() + addMinutes);
+        return now.toTimeString().split(" ")[0];
+      }
+
+      function recordFeedback(success) {
+        const algo = algorithms[currentAlgorithm];
+        algo.attempts++;
+        if (success) {
+          algo.successRate++;
+          showToast("✅ Bonne prédiction !");
+        } else {
+          showToast("❌ Mauvaise prédiction...");
+        }
+        saveAlgorithmsStats();
+        updateAlgorithmsStatsDisplay();
+        updateBestAlgorithm();
+      }
+
+      function showFeedbackButtons() {
+        const box = document.querySelector(".result-box");
+        if (!box) return;
+        const old = document.getElementById("feedbackButtons");
+        if (old) old.remove();
+        const div = document.createElement("div");
+        div.className = "feedback-buttons";
+        div.id = "feedbackButtons";
+        div.innerHTML = `
+          <div class="feedback-label">Cette prédiction était-elle correcte ?</div>
+          <div class="feedback-actions">
+            <button class="feedback-btn success" onclick="recordFeedback(true)">✅ Oui</button>
+            <button class="feedback-btn failure" onclick="recordFeedback(false)">❌ Non</button>
+          </div>
+        `;
+        box.appendChild(div);
+      }
+
+      // ============================================
+      // TOAST
+      // ============================================
+      function showToast(message, duration = 2000) {
+        const toast = document.getElementById("toastMessage");
+        if (toast) {
+          toast.textContent = message;
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), duration);
+        }
+      }
+
+      // ============================================
+      // COPIER/PARTAGER
+      // ============================================
+      async function copyResult() {
+        const result = document.getElementById("result").innerText;
+        if (result && result !== "--:--:--") {
+          try {
+            await navigator.clipboard.writeText(result);
+            showToast("✅ Copié !");
+            if (navigator.vibrate) navigator.vibrate(50);
+          } catch (err) {
+            showToast("❌ Erreur");
+          }
+        } else {
+          showToast("❌ Aucune prédiction");
+        }
+      }
+
+      async function shareResult() {
+        const result = document.getElementById("result").innerText;
+        if (result && result !== "--:--:--") {
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: "Prédiction JetX",
+                text: `🎯 Heure prédite : ${result}`,
+              });
+              showToast("✅ Partagé !");
+            } catch (err) {
+              if (err.name !== "AbortError") copyResult();
+            }
+          } else {
+            copyResult();
+          }
+        } else {
+          showToast("❌ Aucune prédiction");
+        }
+      }
+
+      // ============================================
+      // SAISIE HEURE
+      // ============================================
+      const hh = document.getElementById("hh");
+      const mm = document.getElementById("mm");
+      const ss = document.getElementById("ss");
+      const hint = document.getElementById("inputHint");
+
+      if (hh && mm && ss) {
+        function formatTimeInput(input, max, next) {
+          let val = input.value.replace(/\D/g, "");
+          if (val.length > 0) {
+            if (val.length > 2) val = val.slice(0, 2);
+            let num = parseInt(val);
+            if (num > max) val = max.toString();
+            input.value = val;
+            if (val.length === 2 && next)
+              setTimeout(() => {
+                next.focus();
+                next.select();
+              }, 10);
+          } else {
+            input.value = "";
+          }
+        }
+
+        function backspace(e, cur, prev) {
+          if (e.key === "Backspace" && cur.value.length === 0 && prev) {
+            e.preventDefault();
+            setTimeout(() => {
+              prev.focus();
+              prev.setSelectionRange(prev.value.length, prev.value.length);
+            }, 10);
+          }
+        }
+
+        hh.addEventListener("input", function () {
+          formatTimeInput(this, 23, mm);
+          if (hint) {
+            hint.classList.add("show");
+            setTimeout(() => hint.classList.remove("show"), 2000);
+          }
+        });
+        mm.addEventListener("input", function () {
+          formatTimeInput(this, 59, ss);
+        });
+        ss.addEventListener("input", function () {
+          formatTimeInput(this, 59, null);
+        });
+
+        hh.addEventListener("keydown", (e) => backspace(e, this, null));
+        mm.addEventListener("keydown", (e) => backspace(e, this, hh));
+        ss.addEventListener("keydown", (e) => backspace(e, this, mm));
+
+        [hh, mm, ss].forEach((inp) => {
+          inp.addEventListener("focus", function () {
+            setTimeout(() => this.select(), 10);
+          });
+        });
+
+        hh.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            mm.focus();
+          }
+        });
+        mm.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            ss.focus();
+          }
+        });
+        ss.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            runPrediction();
+          }
+        });
+      }
+
+      // ============================================
+      // SAISIE CHIFFRES
+      // ============================================
+      const c1 = document.getElementById("c1");
+      const c2 = document.getElementById("c2");
+      const c3 = document.getElementById("c3");
+
+      if (c1 && c2 && c3) {
+        function formatNum(inp, max = 999) {
+          let val = inp.value.replace(/\D/g, "");
+          if (val.length > 0) {
+            if (val.length > 3) val = val.slice(0, 3);
+            let num = parseInt(val);
+            if (num > max) num = max;
+            inp.value = num;
+            if (num >= 0 && num <= max) inp.classList.add("valid");
+            else inp.classList.remove("valid");
+          } else {
+            inp.value = "";
+            inp.classList.remove("valid");
+          }
+        }
+        c1.addEventListener("input", function () {
+          formatNum(this);
+        });
+        c2.addEventListener("input", function () {
+          formatNum(this);
+        });
+        c3.addEventListener("input", function () {
+          formatNum(this);
+        });
+
+        [c1, c2, c3].forEach((inp) => {
+          inp.addEventListener("focus", function () {
+            if (this.parentElement)
+              this.parentElement.style.transform = "scale(1.02)";
+            this.select();
+          });
+          inp.addEventListener("blur", function () {
+            if (this.parentElement)
+              this.parentElement.style.transform = "scale(1)";
+            if (this.value === "") this.value = "0";
+          });
+        });
+
+        c1.addEventListener("keydown", (e) => {
+          if (
+            e.key === "ArrowRight" &&
+            this.selectionStart === this.value.length
+          ) {
+            e.preventDefault();
+            c2.focus();
+          }
+        });
+        c2.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft" && this.selectionStart === 0) {
+            e.preventDefault();
+            c1.focus();
+          }
+          if (
+            e.key === "ArrowRight" &&
+            this.selectionStart === this.value.length
+          ) {
+            e.preventDefault();
+            c3.focus();
+          }
+        });
+        c3.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft" && this.selectionStart === 0) {
+            e.preventDefault();
+            c2.focus();
+          }
+        });
+
+        c1.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            c2.focus();
+            c2.select();
+          }
+        });
+        c2.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            c3.focus();
+            c3.select();
+          }
+        });
+        c3.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            c3.blur();
+            runPrediction();
+          }
+        });
+      }
+
+      // ============================================
+      // HISTORIQUE
+      // ============================================
+      const HISTORY_KEY = "prediction_history";
+      const MAX_HISTORY = 5;
+
+      function loadHistory() {
+        const h = localStorage.getItem(HISTORY_KEY);
+        return h ? JSON.parse(h) : [];
+      }
+
+      function saveHistory(h) {
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
+      }
+
+      function addToHistory(input, output, hash) {
+        let h = loadHistory();
+        h.unshift({
+          id: Date.now(),
+          input,
+          output,
+          hash,
+          timestamp: new Date().toLocaleTimeString("fr-FR"),
+        });
+        if (h.length > MAX_HISTORY) h = h.slice(0, MAX_HISTORY);
+        saveHistory(h);
+        displayHistory();
+      }
+
+      function displayHistory() {
+        const list = document.getElementById("historyList");
+        if (!list) return;
+        const h = loadHistory();
+        if (h.length === 0) {
+          list.innerHTML =
+            '<div style="color:var(--text-secondary); text-align:center; padding:20px;">Aucune prédiction</div>';
+        } else {
+          let html = "";
+          h.forEach((item, i) => {
+            html += `<div class="history-item" onclick="loadPrediction('${item.input.replace(/'/g, "\\'")}')">
+              <div><div class="input">${item.input}</div><div class="time">${item.timestamp}</div></div>
+              <div class="output">${item.output}${i === 0 ? '<span class="badge-new">NOUVEAU</span>' : ""}</div>
+            </div>`;
+          });
+          list.innerHTML = html;
+        }
+      }
+
+      function loadPrediction(input) {
+        const parts = input.split("+");
+        if (parts.length >= 4) {
+          const t = parts[0].trim().split(":");
+          if (t.length >= 3) {
+            document.getElementById("hh").value = t[0].padStart(2, "0");
+            document.getElementById("mm").value = t[1].padStart(2, "0");
+            document.getElementById("ss").value = t[2].padStart(2, "0");
+          }
+          document.getElementById("c1").value = parts[1]?.trim() || "5";
+          document.getElementById("c2").value = parts[2]?.trim() || "89";
+          document.getElementById("c3").value = parts[3]?.trim() || "7";
+        }
+        showToast("📋 Prédiction chargée");
+      }
+
+      // ============================================
+      // PRÉDICTION
+      // ============================================
+      function simpleHash(str) {
+        let h = 0;
+        for (let i = 0; i < str.length; i++) {
+          const c = str.charCodeAt(i);
+          h = (h << 5) - h + c;
+          h = h & h;
+        }
+        return Math.abs(h);
+      }
+
+      async function runPrediction() {
+        if (!isOnline) {
+          showToast("❌ Pas de connexion internet", 3000);
+          return;
+        }
+        if (!isLicenseValid) {
+          document.getElementById("license-modal").style.display = "flex";
+          return;
+        }
+
+        const hh = document.getElementById("hh")?.value || "00";
+        const mm = document.getElementById("mm")?.value || "00";
+        const ss = document.getElementById("ss")?.value || "00";
+        const c1 = document.getElementById("c1")?.value.trim() || "0";
+        const c2 = document.getElementById("c2")?.value.trim() || "0";
+        const c3 = document.getElementById("c3")?.value.trim() || "0";
+
+        const hhNum = parseInt(hh) || 0;
+        const mmNum = parseInt(mm) || 0;
+        const ssNum = parseInt(ss) || 0;
+
+        if (hhNum > 23 || mmNum > 59 || ssNum > 59) {
+          alert("❌ Heure invalide");
+          return;
+        }
+
+        const btn = document.getElementById("mainBtn");
+        const result = document.getElementById("result");
+        const hashBox = document.getElementById("hashBox");
+
+        if (btn) btn.disabled = true;
+        if (hashBox) hashBox.style.display = "block";
+        if (result) result.innerText = "Calcul...";
+
+        const seed = `${hh.padStart(2, "0")}:${mm.padStart(2, "0")}:${ss.padStart(2, "0")} + ${c1} + ${c2} + ${c3}`;
+        const resultTime = predictWithCurrentAlgorithm(
+          seed,
+          hhNum,
+          mmNum,
+          ssNum,
+        );
+
+        if (hashBox)
+          hashBox.innerText = `Algo: ${algorithms[currentAlgorithm].name}`;
+        await new Promise((r) => setTimeout(r, 500));
+
+        if (result) result.innerText = resultTime;
+        currentPrediction = resultTime;
+        lastPrediction = { seed, resultTime };
+        addToHistory(seed, resultTime, algorithms[currentAlgorithm].id);
+
+        document.getElementById("copyBtn").style.opacity = "1";
+        document.getElementById("shareBtn").style.opacity = "1";
+        showFeedbackButtons();
+
+        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        if (btn) btn.disabled = false;
+        setTimeout(() => {
+          if (hashBox) hashBox.style.display = "none";
+        }, 1500);
+      }
+
+      // ============================================
+      // INITIALISATION
+      // ============================================
+      window.onload = async () => {
+        if (!isAppInstalled()) return;
+
+        startInternetMonitoring();
+        if (!isOnline) return;
+
+        renderThemeOptions();
+        renderWallpaperOptions();
+        initMusic();
+        loadTheme();
+        loadWallpaper();
+        loadSlideshowSettings();
+        loadAlgorithmsStats();
+        displayHistory();
+
+        document.getElementById("license-input").value =
+          "JETX-Z2PV-ZSPU-HXCX-LALS";
+
+        const saved = localStorage.getItem("license_key");
+        if (saved) {
+          const result = await verifyLicense(saved);
+          if (result.valid) {
+            localStorage.setItem("pred-jetx-pro_active", "true");
+            isLicenseValid = true;
+            currentLicense = result;
+            document.getElementById("license-modal").style.display = "none";
+            document.getElementById("overlay").style.display = "flex";
+            updateLicenseStatus(result);
+          }
+        }
+      };
+
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>

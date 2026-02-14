@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Installation - PredJetX Pro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background: #0b0e14;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .logo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 30px;
+        filter: drop-shadow(0 0 30px #00d1ff);
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      h1 {
+        font-size: 28px;
+        background: linear-gradient(135deg, #00d1ff, #00ffcc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+      }
+
+      .message {
+        color: #a0a8b8;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .install-btn {
+        background: linear-gradient(135deg, #00d1ff, #0077ff);
+        color: white;
+        border: none;
+        padding: 20px 40px;
+        border-radius: 60px;
+        font-size: 18px;
+        font-weight: 700;
+        font-family: "Orbitron", sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0, 209, 255, 0.3);
+      }
+
+      .install-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 209, 255, 0.5);
+      }
+
+      .install-btn:active {
+        transform: translateY(0);
+      }
+
+      .install-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .loader {
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top: 3px solid #00d1ff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .steps {
+        background: rgba(30, 36, 48, 0.5);
+        border-radius: 20px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        color: white;
+        font-size: 14px;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-number {
+        width: 30px;
+        height: 30px;
+        background: #00d1ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #0b0e14;
+      }
+
+      .note {
+        color: #666;
+        font-size: 12px;
+        margin-top: 20px;
+      }
+
+      .error {
+        color: #ff3b3b;
+        margin-top: 20px;
+        font-size: 14px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="https://img.icons8.com/fluency/512/000000/airplane-mode-on.png"
+        alt="PredJetX Pro"
+        class="logo"
+      />
+
+      <h1>PREDJETX PRO</h1>
+
+      <div class="message">
+        ⚠️ Cette application ne peut pas être utilisée dans un navigateur.<br />
+        Elle doit être installée sur votre appareil.
+      </div>
+
+      <button class="install-btn" id="installBtn" onclick="startInstallation()">
+        📲 INSTALLER MAINTENANT
+      </button>
+
+      <div class="loader" id="loader" style="display: none"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Cliquez sur le bouton "INSTALLER"</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Confirmez l'installation</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Ouvrez l'application depuis l'écran d'accueil</div>
+        </div>
+      </div>
+
+      <div class="note">
+        💡 Si le bouton ne fonctionne pas, utilisez le menu de votre navigateur
+        :<br />
+        <strong>Android :</strong> Menu ⋮ > "Installer l'application"<br />
+        <strong>iPhone :</strong> Partager > "Sur l'écran d'accueil"
+      </div>
+
+      <div class="error" id="errorMessage">
+        ❌ Installation non supportée. Veuillez utiliser les instructions
+        manuelles.
+      </div>
+    </div>
+
+    <script>
+      let deferredPrompt;
+
+      // Vérifier si l'app est déjà installée
+      function isInstalled() {
+        return (
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.navigator.standalone === true
+        );
+      }
+
+      // Rediriger si déjà installée
+      if (isInstalled()) {
+        window.location.href = "index.html";
+      }
+
+      // Capturer l'événement beforeinstallprompt
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log("Installation disponible");
+      });
+
+      // Fonction pour démarrer l'installation
+      async function startInstallation() {
+        const btn = document.getElementById("installBtn");
+        const loader = document.getElementById("loader");
+        const errorMsg = document.getElementById("errorMessage");
+
+        if (!deferredPrompt) {
+          // Pas de support de l'installation automatique
+          errorMsg.style.display = "block";
+          setTimeout(() => {
+            errorMsg.style.display = "none";
+          }, 5000);
+          return;
+        }
+
+        // Cacher le bouton, afficher le loader
+        btn.style.display = "none";
+        loader.style.display = "block";
+
+        try {
+          // Déclencher l'installation
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+
+          if (outcome === "accepted") {
+            console.log("Installation acceptée");
+            // Attendre que l'installation soit terminée
+            window.addEventListener("appinstalled", () => {
+              setTimeout(() => {
+                window.location.href = "index.html";
+              }, 1000);
+            });
+          } else {
+            console.log("Installation refusée");
+            // Réafficher le bouton
+            btn.style.display = "block";
+            loader.style.display = "none";
+          }
+        } catch (err) {
+          console.error("Erreur:", err);
+          btn.style.display = "block";
+          loader.style.display = "none";
+          errorMsg.style.display = "block";
+          errorMsg.textContent = "❌ Erreur lors de l'installation";
+        }
+
+        deferredPrompt = null;
+      }
+
+      // Vérifier périodiquement si l'app a été installée
+      setInterval(() => {
+        if (isInstalled()) {
+          window.location.href = "index.html";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

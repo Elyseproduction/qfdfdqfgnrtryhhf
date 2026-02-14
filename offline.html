@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hors ligne - PredJetX Pro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0b0e14;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 400px;
+      }
+
+      .icon {
+        font-size: 80px;
+        margin-bottom: 30px;
+        filter: drop-shadow(0 0 20px #ff3b3b);
+      }
+
+      h1 {
+        font-size: 28px;
+        color: #ff3b3b;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px rgba(255, 59, 59, 0.5);
+      }
+
+      p {
+        color: #a0a8b8;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .retry-btn {
+        background: linear-gradient(135deg, #ff3b3b, #ff0000);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      .retry-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 59, 59, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">📡</div>
+      <h1>PAS DE CONNEXION</h1>
+      <p>
+        Vous êtes actuellement hors ligne.<br />
+        Cette application nécessite une connexion internet pour vérifier votre
+        licence et fonctionner.
+      </p>
+      <button class="retry-btn" onclick="window.location.reload()">
+        RÉESSAYER
+      </button>
+    </div>
+  </body>
+</html>

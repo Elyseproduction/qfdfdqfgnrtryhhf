@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Gestion des Licences</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0b0e14;
+        color: white;
+        font-family: "Inter", sans-serif;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: rgba(30, 36, 48, 0.7);
+        border-radius: 20px;
+        border: 1px solid #00d1ff;
+      }
+
+      h1 {
+        font-family: "Orbitron", sans-serif;
+        background: linear-gradient(135deg, #00d1ff, #00ffcc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: rgba(30, 36, 48, 0.5);
+        border-radius: 15px;
+        padding: 20px;
+        border: 1px solid rgba(0, 209, 255, 0.3);
+      }
+
+      .stat-value {
+        font-size: 32px;
+        font-weight: 900;
+        color: #00d1ff;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .stat-label {
+        color: #a0a8b8;
+        font-size: 12px;
+        margin-top: 5px;
+      }
+
+      .panel {
+        background: rgba(30, 36, 48, 0.5);
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .panel-title {
+        font-family: "Orbitron", sans-serif;
+        color: #00d1ff;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        color: #a0a8b8;
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 12px;
+        background: rgba(11, 14, 20, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-family: "Inter", sans-serif;
+      }
+
+      select:focus,
+      input:focus {
+        outline: none;
+        border-color: #00d1ff;
+      }
+
+      button {
+        background: linear-gradient(135deg, #00d1ff, #0077ff);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(0, 209, 255, 0.3);
+      }
+
+      button.secondary {
+        background: linear-gradient(135deg, #666, #333);
+      }
+
+      .license-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .license-table th {
+        text-align: left;
+        padding: 12px;
+        color: #a0a8b8;
+        font-size: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .license-table td {
+        padding: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .status-badge {
+        padding: 4px 8px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: bold;
+      }
+
+      .status-active {
+        background: rgba(0, 255, 102, 0.2);
+        color: #00ff66;
+        border: 1px solid #00ff66;
+      }
+
+      .status-expired {
+        background: rgba(255, 59, 59, 0.2);
+        color: #ff3b3b;
+        border: 1px solid #ff3b3b;
+      }
+
+      .status-revoked {
+        background: rgba(255, 170, 0, 0.2);
+        color: #ffaa00;
+        border: 1px solid #ffaa00;
+      }
+
+      .action-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        margin-right: 5px;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: rgba(30, 36, 48, 0.95);
+        padding: 30px;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 90%;
+        border: 1px solid #00d1ff;
+      }
+
+      .key-display {
+        background: rgba(11, 14, 20, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        font-family: monospace;
+        font-size: 18px;
+        text-align: center;
+        margin: 20px 0;
+        color: #00ffcc;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>GESTION DES LICENCES</h1>
+        <div>
+          <button onclick="logout()" class="secondary">DÉCONNEXION</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value" id="totalLicenses">0</div>
+          <div class="stat-label">Licences totales</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="activeLicenses">0</div>
+          <div class="stat-label">Licences actives</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="expiringSoon">0</div>
+          <div class="stat-label">Expirent bientôt</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="devicesCount">0</div>
+          <div class="stat-label">Appareils connectés</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">CRÉER UNE LICENCE</div>
+        <div class="form-group">
+          <label>Type de licence</label>
+          <select id="licenseType">
+            <option value="premium">Premium (30 jours, 2 appareils)</option>
+            <option value="lifetime">Lifetime (Illimité, 5 appareils)</option>
+            <option value="trial">Trial (24h, 1 appareil)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Durée (jours)</label>
+          <input
+            type="number"
+            id="licenseDuration"
+            value="30"
+            min="1"
+            max="3650"
+          />
+        </div>
+        <button onclick="createLicense()">GÉNÉRER LA LICENCE</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">RECHERCHER UNE LICENCE</div>
+        <div style="display: flex; gap: 10px">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Entrez la clé de licence..."
+            style="flex: 1"
+          />
+          <button onclick="searchLicense()">RECHERCHER</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">LISTE DES LICENCES</div>
+        <table class="license-table">
+          <thead>
+            <tr>
+              <th>CLÉ</th>
+              <th>TYPE</th>
+              <th>CRÉATION</th>
+              <th>EXPIRATION</th>
+              <th>STATUT</th>
+              <th>APPAREILS</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="licenseTableBody">
+            <!-- Les licences seront chargées ici -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal pour afficher la nouvelle licence -->
+    <div class="modal" id="licenseModal">
+      <div class="modal-content">
+        <h2 style="margin-bottom: 20px">LICENCE GÉNÉRÉE</h2>
+        <div class="key-display" id="newLicenseKey"></div>
+        <div style="text-align: center; margin-top: 20px">
+          <button onclick="copyLicense()">COPIER</button>
+          <button onclick="closeModal()" class="secondary">FERMER</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+      // Vérification de l'authentification
+      if (!sessionStorage.getItem("adminAuth")) {
+        window.location.href = "login.html";
+      }
+
+      let currentLicenses = [];
+      let lastGeneratedKey = "";
+
+      async function loadLicenses() {
+        try {
+          const response = await fetch(
+            "https://api.github.com/repos/VOTRE_USERNAME/VOTRE_REPO/contents/licenses.json",
+            {
+              headers: {
+                Authorization: "token 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",
+                Accept: "application/vnd.github.v3+json",
+              },
+            },
+          );
+
+          const data = await response.json();
+          const content = atob(data.content);
+          const licensesData = JSON.parse(content);
+
+          displayLicenses(licensesData.licenses);
+          updateStats(licensesData);
+        } catch (error) {
+          console.error("Erreur:", error);
+          alert("Erreur lors du chargement des licences");
+        }
+      }
+
+      function displayLicenses(licenses) {
+        const tbody = document.getElementById("licenseTableBody");
+        let html = "";
+
+        Object.entries(licenses).forEach(([key, license]) => {
+          const created = new Date(license.created).toLocaleDateString();
+          const expiry = new Date(license.expiry).toLocaleDateString();
+          const now = new Date();
+          const expiryDate = new Date(license.expiry);
+
+          let statusClass = "status-active";
+          if (license.status !== "active") {
+            statusClass = "status-revoked";
+          } else if (expiryDate < now) {
+            statusClass = "status-expired";
+          }
+
+          html += `
+                    <tr>
+                        <td><code>${key}</code></td>
+                        <td>${license.type}</td>
+                        <td>${created}</td>
+                        <td>${expiry}</td>
+                        <td><span class="status-badge ${statusClass}">${license.status}</span></td>
+                        <td>${license.devices.length}/${license.maxDevices}</td>
+                        <td>
+                            <button class="action-btn" onclick="extendLicense('${key}')">➕</button>
+                            <button class="action-btn" onclick="revokeLicense('${key}')">🚫</button>
+                            <button class="action-btn" onclick="deleteLicense('${key}')">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+        });
+
+        tbody.innerHTML = html;
+      }
+
+      function updateStats(licensesData) {
+        const licenses = Object.values(licensesData.licenses);
+        const now = new Date();
+        const expiringThreshold = new Date();
+        expiringThreshold.setDate(expiringThreshold.getDate() + 7);
+
+        const activeLicenses = licenses.filter(
+          (l) => l.status === "active" && new Date(l.expiry) > now,
+        ).length;
+
+        const expiringSoon = licenses.filter((l) => {
+          const expiry = new Date(l.expiry);
+          return (
+            l.status === "active" && expiry > now && expiry <= expiringThreshold
+          );
+        }).length;
+
+        const devices = licenses.reduce((sum, l) => sum + l.devices.length, 0);
+
+        document.getElementById("totalLicenses").textContent = licenses.length;
+        document.getElementById("activeLicenses").textContent = activeLicenses;
+        document.getElementById("expiringSoon").textContent = expiringSoon;
+        document.getElementById("devicesCount").textContent = devices;
+      }
+
+      async function createLicense() {
+        const type = document.getElementById("licenseType").value;
+        const duration = parseInt(
+          document.getElementById("licenseDuration").value,
+        );
+
+        try {
+          // Récupérer les licences actuelles
+          const response = await fetch(
+            "https://api.github.com/repos/VOTRE_USERNAME/VOTRE_REPO/contents/licenses.json",
+            {
+              headers: {
+                Authorization: "token VOTRE_TOKEN",
+                Accept: "application/vnd.github.v3+json",
+              },
+            },
+          );
+
+          const data = await response.json();
+          const sha = data.sha;
+          const content = JSON.parse(atob(data.content));
+
+          // Générer une nouvelle clé
+          const newKey = generateLicenseKey();
+          lastGeneratedKey = newKey;
+
+          const now = new Date();
+          const expiry = new Date(now);
+          expiry.setDate(expiry.getDate() + duration);
+
+          content.licenses[newKey] = {
+            created: now.toISOString(),
+            expiry: expiry.toISOString(),
+            status: "active",
+            type: type,
+            maxDevices: type === "lifetime" ? 5 : type === "trial" ? 1 : 2,
+            devices: [],
+          };
+
+          // Sauvegarder
+          const updateResponse = await fetch(
+            "https://api.github.com/repos/VOTRE_USERNAME/VOTRE_REPO/contents/licenses.json",
+            {
+              method: "PUT",
+              headers: {
+                Authorization: "token VOTRE_TOKEN",
+                Accept: "application/vnd.github.v3+json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                message: `Ajout licence ${newKey}`,
+                content: btoa(JSON.stringify(content, null, 2)),
+                sha: sha,
+              }),
+            },
+          );
+
+          if (updateResponse.ok) {
+            document.getElementById("newLicenseKey").textContent = newKey;
+            document.getElementById("licenseModal").style.display = "flex";
+            loadLicenses(); // Recharger la liste
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          alert("Erreur lors de la création de la licence");
+        }
+      }
+
+      function generateLicenseKey() {
+        const prefix = "JETX-";
+        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        let key = prefix;
+
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            key += chars[Math.floor(Math.random() * chars.length)];
+          }
+          if (i < 3) key += "-";
+        }
+
+        return key;
+      }
+
+      async function revokeLicense(key) {
+        if (!confirm(`Révoquer la licence ${key} ?`)) return;
+
+        try {
+          // Implémentez la révocation similaire à createLicense
+          // en mettant status: 'revoked'
+          alert("Fonction à implémenter avec votre token GitHub");
+        } catch (error) {
+          console.error("Erreur:", error);
+        }
+      }
+
+      async function deleteLicense(key) {
+        if (!confirm(`Supprimer définitivement la licence ${key} ?`)) return;
+
+        try {
+          // Implémentez la suppression similaire à createLicense
+          // en supprimant l'entrée
+          alert("Fonction à implémenter avec votre token GitHub");
+        } catch (error) {
+          console.error("Erreur:", error);
+        }
+      }
+
+      function copyLicense() {
+        navigator.clipboard.writeText(lastGeneratedKey);
+        alert("Licence copiée !");
+      }
+
+      function closeModal() {
+        document.getElementById("licenseModal").style.display = "none";
+      }
+
+      function logout() {
+        sessionStorage.removeItem("adminAuth");
+        window.location.href = "login.html";
+      }
+
+      // Charger les licences au démarrage
+      loadLicenses();
+      // Recharger toutes les 30 secondes
+      setInterval(loadLicenses, 30000);
+    </script>
+  </body>
+</html>
